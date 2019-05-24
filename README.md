@@ -7,6 +7,12 @@ Pour les auditeurs, avoir des chapitres dans vos podcast peut être bénéfique.
 ## Prérequis
 - [FFMPEG](https://ffmpeg.org/download.html)
 
+## Instalation
+- Récupérez la dernière version disponible dans les [sorties](https://github.com/Bigaston/PodChapter/releases)
+- Extrayez l'archive
+- **Laissez les fichiers .bat dans le même dossier que l'executable, ils sont obligatoires pour que le code fonctionne**
+- Lancez `PodChapter.exe`
+
 ## Utilisation
 1. Choisissez votre .MP3
 2. Ajoutez les chapitres que vous voulez (au format Heure/Minutes/Secondes)

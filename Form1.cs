@@ -270,5 +270,87 @@ namespace PodChapter
             MessageBox.Show("Chapitres ajoutés avec succès!");
             
         }
+
+        private void BtnOpenChapter_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogChapitres.ShowDialog() == DialogResult.OK)
+            {
+                string fichier = openFileDialogChapitres.FileName;
+
+                string[] lignes = File.ReadAllText(fichier).Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+
+                for (int i = 0; i < lignes.Length-1; i++)
+                {
+                    string[] partie = lignes[i].Split(Convert.ToChar(9));
+                    TimeSpan t = TimeSpan.FromSeconds(double.Parse(partie[0].Replace(".",",")));
+
+                    Label lb = new Label();
+                    lb.Text = (nb_chapitres + 1).ToString();
+                    lb.Top = nb_chapitres * 30;
+                    lb.AutoSize = true;
+                    lb.Tag = (nb_chapitres + 1).ToString();
+
+                    TextBox tx1 = new TextBox();
+                    tx1.Left = 27;
+                    tx1.Size = new System.Drawing.Size(212, 27);
+                    tx1.Tag = (nb_chapitres + 1).ToString();
+                    tx1.Top = nb_chapitres * 30;
+                    tx1.Text = partie[2];
+
+                    TextBox tx2 = new TextBox();
+                    tx2.Left = 245;
+                    tx2.Size = new System.Drawing.Size(25, 27);
+                    tx2.Tag = (nb_chapitres + 1).ToString();
+                    tx2.Top = nb_chapitres * 30;
+                    tx2.Text = t.Hours.ToString();
+                    tx2.KeyPress += new KeyPressEventHandler(keyPressH);
+
+                    TextBox tx3 = new TextBox();
+                    tx3.Left = 270;
+                    tx3.Size = new System.Drawing.Size(25, 27);
+                    tx3.Tag = (nb_chapitres + 1).ToString();
+                    tx3.Top = nb_chapitres * 30;
+                    tx3.Text = t.Minutes.ToString();
+                    tx3.KeyPress += new KeyPressEventHandler(keyPressM);
+
+
+                    TextBox tx4 = new TextBox();
+                    tx4.Left = 295;
+                    tx4.Size = new System.Drawing.Size(25, 27);
+                    tx4.Tag = (nb_chapitres + 1).ToString();
+                    tx4.Top = nb_chapitres * 30;
+                    tx4.Text = t.Seconds.ToString(); ;
+                    tx4.KeyPress += new KeyPressEventHandler(keyPressS);
+
+                    Button btn = new Button();
+                    btn.Left = 322;
+                    btn.Size = new System.Drawing.Size(32, 27);
+                    btn.Tag = (nb_chapitres + 1).ToString();
+                    btn.Top = nb_chapitres * 30;
+                    btn.Text = "-";
+                    btn.Click += new System.EventHandler(btnDelete);
+
+                    pnlChapitres.Controls.Add(lb);
+                    pnlChapitres.Controls.Add(tx1);
+                    pnlChapitres.Controls.Add(tx2);
+                    pnlChapitres.Controls.Add(tx3);
+                    pnlChapitres.Controls.Add(tx4);
+                    pnlChapitres.Controls.Add(btn);
+
+                    foreach (Control con in pnlChapitres.Controls)
+                    {
+                        if (con is Button && con.Tag.Equals((nb_chapitres).ToString()))
+                        {
+                            ((Button)con).Enabled = false;
+                        }
+
+                    }
+
+                    nb_chapitres++;
+                }
+
+                MessageBox.Show("Chapitres importés depuis Audacity!");
+            }
+        }
     }
 }

@@ -37,6 +37,8 @@
             this.pnlChapitres = new System.Windows.Forms.Panel();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnOpenChapter = new System.Windows.Forms.Button();
+            this.openFileDialogChapitres = new System.Windows.Forms.OpenFileDialog();
             this.grpChapitres.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +65,7 @@
             // 
             // grpChapitres
             // 
+            this.grpChapitres.Controls.Add(this.btnOpenChapter);
             this.grpChapitres.Controls.Add(this.btnValide);
             this.grpChapitres.Controls.Add(this.btnAddChapter);
             this.grpChapitres.Controls.Add(this.pnlChapitres);
@@ -86,9 +89,9 @@
             // 
             // btnAddChapter
             // 
-            this.btnAddChapter.Location = new System.Drawing.Point(79, 227);
+            this.btnAddChapter.Location = new System.Drawing.Point(7, 228);
             this.btnAddChapter.Name = "btnAddChapter";
-            this.btnAddChapter.Size = new System.Drawing.Size(234, 32);
+            this.btnAddChapter.Size = new System.Drawing.Size(188, 32);
             this.btnAddChapter.TabIndex = 1;
             this.btnAddChapter.Text = "Ajouter un chapitre";
             this.btnAddChapter.UseVisualStyleBackColor = true;
@@ -110,6 +113,21 @@
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // btnOpenChapter
+            // 
+            this.btnOpenChapter.Location = new System.Drawing.Point(201, 228);
+            this.btnOpenChapter.Name = "btnOpenChapter";
+            this.btnOpenChapter.Size = new System.Drawing.Size(194, 32);
+            this.btnOpenChapter.TabIndex = 3;
+            this.btnOpenChapter.Text = "Importer les chapitres";
+            this.btnOpenChapter.UseVisualStyleBackColor = true;
+            this.btnOpenChapter.Click += new System.EventHandler(this.BtnOpenChapter_Click);
+            // 
+            // openFileDialogChapitres
+            // 
+            this.openFileDialogChapitres.FileName = "Piste de marqueurs.txt";
+            this.openFileDialogChapitres.Filter = "Piste de marqueurs (*.txt)|*.txt";
             // 
             // PodChapter
             // 
@@ -139,6 +157,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button btnValide;
+        private System.Windows.Forms.Button btnOpenChapter;
+        private System.Windows.Forms.OpenFileDialog openFileDialogChapitres;
     }
 }
 

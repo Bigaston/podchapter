@@ -21,7 +21,7 @@ namespace PodChapter
 
         private void PodChapter_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         int nb_chapitres = 0;
@@ -31,7 +31,8 @@ namespace PodChapter
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 lblFolder.Text = openFileDialog.FileName;
-                grpChapitres.Visible = true;
+                tacMetadata.Visible = true;
+                btnValide.Visible = true;
             }
         }
 
@@ -210,6 +211,14 @@ namespace PodChapter
         {
             string chapter_string = ";FFMETADATA1" + System.Environment.NewLine;
 
+            foreach (Control cont in tabData.Controls)
+            {
+                if (cont is TextBox)
+                {
+                    chapter_string += cont.Tag + "=" + cont.Text;
+                }
+            }
+
             int nb = 0;
             string title = "";
 
@@ -267,7 +276,7 @@ namespace PodChapter
             File.Delete("audioin.mp3");
             File.Delete("audioout.mp3");
             File.Delete("metadata.txt");
-            MessageBox.Show("Chapitres ajoutés avec succès!");
+            MessageBox.Show("Métadonnés ajoutés avec succès!");
             
         }
 

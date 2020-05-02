@@ -1,1 +1,0 @@
-ffmpeg -i audioin.mp3 -i metadata.txt -map_metadata 1 -codec copy audioout.mp3

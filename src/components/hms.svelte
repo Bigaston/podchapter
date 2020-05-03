@@ -25,7 +25,9 @@
 	function fromHMS(str) {
 		let tab = str.split(":")
 
-		return ((parseInt(tab[0]) * 3600) + (parseInt(tab[1]) * 60) + (parseInt(tab[2]))) * 1000
+		let nb_ms = ((parseInt(tab[0]) * 3600) + (parseInt(tab[1]) * 60) + (parseInt(tab[2]))) * 1000
+
+		return nb_ms >= 1 ? nb_ms : 1
 	}
 
 	function toHMS(pMs) {

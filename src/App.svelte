@@ -22,5 +22,5 @@
 {#if !file_chosed}
 	<FileSelect on:file={fileChosed} />
 {:else}
-	<ChapterEditor {file_path}/>
+	<ChapterEditor {file_path} on:back={() => {file_path = undefined; file_chosed = false}}/>
 {/if}

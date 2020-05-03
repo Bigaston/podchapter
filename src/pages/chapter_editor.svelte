@@ -1,4 +1,7 @@
 <script>
+	import {createEventDispatcher} from "svelte";
+	const dispatch = createEventDispatcher()
+
 	export let file_path = "";
 
 	const NodeID3 = require("node-id3")
@@ -16,6 +19,10 @@
 	let artist = tags.artist;
 	let album = tags.album;
 	let year = tags.year;
+	let composer = tags.composer;
+	let genre = tags.genre;
+	let trackNumber = tags.trackNumber;
+	let performerInfo = tags.performerInfo
 	let image = tags.image != undefined ? tags.image.imageBuffer : undefined;
 	let image_mime = tags.image != undefined ? tags.image.mime : undefined;
 
@@ -39,12 +46,10 @@
 		}
 	})
 
-	console.log(tags)
-
 	function addChapter() {
 		let new_chapter = {
 			elementID: "" + Date.now(),
-			startTimeMs: 0,
+			startTimeMs: 1,
 			endTimeMs: 1000,
 			tags: {
 				title: ""
@@ -60,11 +65,17 @@
 	}
 
 	function saveTag() {
-		let new_tags = {
+		let new_tags = {...tags}
+
+		new_tags = {
 			title: title,
 			artist: artist,
 			album: album,
-			year: "" + year
+			year: "" + year,
+			composer: composer,
+			genre: genre,
+			trackNumber: trackNumber,
+			performerInfo: performerInfo
 		}
 
 		if (image != undefined) {
@@ -100,8 +111,6 @@
 
 			new_tags.chapter = chapter_list;
 
-			console.log(new_tags)
-
 			let success = NodeID3.write(new_tags, file_path)
 
 			if (success) {
@@ -126,6 +135,10 @@
 
 	function parseImg(img, normalImg) {
 		return img != undefined ? normalImg : undefined;
+	}
+
+	function backToFileSelect() {
+		dispatch("back")
 	}
 </script>
 
@@ -152,12 +165,31 @@
 		width: 100%;
 		margin-left: 10px;
 	}
+
+	.triple {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.tripe input {
+		margin: 5px;
+	}
 </style>
 
+<button on:click={backToFileSelect}>Changer de fichier</button>
+
 <Text placeholder="Titre" bind:value="{title}" name="title" />
-<Text placeholder="Artiste" bind:value="{artist}" name="artist" />
+<Text placeholder="Interprete" bind:value="{artist}" name="artist" />
 <Text placeholder="Album" bind:value="{album}" name="album" />
-<Text placeholder="Année" bind:value="{year}" name="year" type="number" />
+<div class="triple">
+	<Text placeholder="Année" bind:value="{year}" name="year" type="number" />
+	<Text placeholder="Numéro de piste" bind:value="{trackNumber}" name="trackNumber" type="number" />
+	<Text placeholder="Genre" bind:value="{genre}" name="genre" />
+</div>
+<Text placeholder="Compositeur" bind:value="{composer}" name="composer" />
+<Text placeholder="Artiste de l'album" bind:value="{performerInfo}" name="performerInfo" />
+
 <Cover bind:image={image} bind:image_mime={image_mime} />
 
 <h2>Les Chapitres</h2>

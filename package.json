@@ -15,7 +15,7 @@
     "svelte-start": "sirv public"
   },
   "keywords": [],
-  "author": "jeffd23",
+  "author": "Bigaston",
   "license": "MIT",
   "config": {
     "forge": {

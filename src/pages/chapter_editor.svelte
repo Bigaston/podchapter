@@ -116,8 +116,8 @@
 			if (success) {
 				dialog.showMessageBox(undefined, {
 					type: "info",
-					title: "Tags sauvegardés!",
-					message: "Tous les tags ont été sauvegardés dans votre fichier!"
+					title: "Tags sauvegardés !",
+					message: "Tous les tags ont été sauvegardés dans votre fichier !"
 				})
 			}
 		} else {
@@ -126,8 +126,8 @@
 			if (success) {
 				dialog.showMessageBox(undefined, {
 					type: "info",
-					title: "Tags sauvegardés!",
-					message: "Tous les tags ont été sauvegardés dans votre fichier!"
+					title: "Tags sauvegardés !",
+					message: "Tous les tags ont été sauvegardés dans votre fichier !"
 				})
 			}
 		}
@@ -203,7 +203,7 @@
 		justify-content: space-between;
 	}
 
-	.tripe input {
+	.triple input {
 		margin: 5px;
 	}
 
@@ -231,7 +231,7 @@
 <Button on:click={backToFileSelect} text="Changer de fichier" />
 
 <Text placeholder="Titre" bind:value="{title}" name="title" />
-<Text placeholder="Interprete" bind:value="{artist}" name="artist" />
+<Text placeholder="Interprète" bind:value="{artist}" name="artist" />
 <Text placeholder="Album" bind:value="{album}" name="album" />
 <div class="triple">
 	<Text placeholder="Année" bind:value="{year}" name="year" type="number" />

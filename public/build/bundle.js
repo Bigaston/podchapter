@@ -907,11 +907,11 @@ var app = (function () {
     			if (img.src !== (img_src_value = /*img_url*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Cover");
     			attr_dev(img, "class", "svelte-1ec5dev");
-    			add_location(img, file$2, 50, 1, 1088);
+    			add_location(img, file$2, 76, 1, 1613);
     			attr_dev(div, "id", "editable");
     			set_style(div, "--size", /*size*/ ctx[0]);
     			attr_dev(div, "class", "svelte-1ec5dev");
-    			add_location(div, file$2, 49, 0, 1021);
+    			add_location(div, file$2, 75, 0, 1543);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -919,7 +919,7 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
-    			dispose = listen_dev(div, "click", /*editCover*/ ctx[2], false, false, false);
+    			dispose = listen_dev(div, "click", /*coverClicked*/ ctx[2], false, false, false);
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*img_url*/ 2 && img.src !== (img_src_value = /*img_url*/ ctx[1])) {
@@ -954,7 +954,7 @@ var app = (function () {
     	let { image_mime } = $$props;
     	let { size = "250px" } = $$props;
     	const nativeImage = require("electron").nativeImage;
-    	const { dialog } = require("electron").remote;
+    	const { dialog, Menu, MenuItem } = require("electron").remote;
     	let img_url;
 
     	if (image != undefined) {
@@ -981,6 +981,24 @@ var app = (function () {
     		}
     	}
 
+    	function deleteImage() {
+    		$$invalidate(3, image = Buffer.from(nativeImage.createEmpty().toJPEG(100)));
+    		$$invalidate(4, image_mime = "none");
+    		$$invalidate(1, img_url = nativeImage.createEmpty().toDataURL());
+    	}
+
+    	// Menu de suppression de l'image
+    	let item_modif = new MenuItem({ click: editCover, label: "Modifier" });
+
+    	let item_suppr = new MenuItem({ click: deleteImage, label: "Supprimer" });
+    	let menu = new Menu();
+    	menu.append(item_modif);
+    	menu.append(item_suppr);
+
+    	function coverClicked() {
+    		menu.popup();
+    	}
+
     	const writable_props = ["image", "image_mime", "size"];
 
     	Object.keys($$props).forEach(key => {
@@ -999,8 +1017,15 @@ var app = (function () {
     		size,
     		nativeImage,
     		dialog,
+    		Menu,
+    		MenuItem,
     		img_url,
     		editCover,
+    		deleteImage,
+    		item_modif,
+    		item_suppr,
+    		menu,
+    		coverClicked,
     		require,
     		undefined,
     		Buffer
@@ -1011,13 +1036,16 @@ var app = (function () {
     		if ("image_mime" in $$props) $$invalidate(4, image_mime = $$props.image_mime);
     		if ("size" in $$props) $$invalidate(0, size = $$props.size);
     		if ("img_url" in $$props) $$invalidate(1, img_url = $$props.img_url);
+    		if ("item_modif" in $$props) item_modif = $$props.item_modif;
+    		if ("item_suppr" in $$props) item_suppr = $$props.item_suppr;
+    		if ("menu" in $$props) menu = $$props.menu;
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [size, img_url, editCover, image, image_mime];
+    	return [size, img_url, coverClicked, image, image_mime];
     }
 
     class Cover extends SvelteComponentDev {

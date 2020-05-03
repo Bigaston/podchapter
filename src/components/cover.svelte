@@ -4,7 +4,7 @@
 	export let size = "250px";
 
 	const nativeImage = require('electron').nativeImage
-	const { dialog } = require('electron').remote
+	const { dialog, Menu, MenuItem } = require('electron').remote
 
 	let img_url;
 	if (image != undefined) {
@@ -25,6 +25,32 @@
 			img_url = native.toDataURL()
 		}
 	}
+
+	function deleteImage() {
+		image = Buffer.from(nativeImage.createEmpty().toJPEG(100))
+		image_mime = "none";
+		img_url = nativeImage.createEmpty().toDataURL()
+	}
+
+	// Menu de suppression de l'image
+	let item_modif = new MenuItem({
+		click: editCover,
+		label: "Modifier"
+	})
+
+	let item_suppr = new MenuItem({
+		click: deleteImage,
+		label: "Supprimer"
+	})
+
+	let menu = new Menu()
+	menu.append(item_modif)
+	menu.append(item_suppr);
+
+	function coverClicked() {
+		menu.popup()
+	}
+
 </script>
 
 <style>
@@ -47,6 +73,6 @@
 	}
 </style>
 
-<div id="editable" on:click={editCover} style="--size: {size};">
+<div id="editable" on:click={coverClicked} style="--size: {size};">
 	<img src="{img_url}" alt="Cover" />
 </div>

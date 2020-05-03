@@ -1,19 +1,19 @@
 <script>
 	import {createEventDispatcher} from "svelte";
-	const dispatch = createEventDispatcher()
-
-	export let file_path = "";
-
-	const NodeID3 = require("node-id3")
-
-	const { dialog } = require('electron').remote
-
 	import Text from "../components/text.svelte";
 	import Cover from "../components/cover.svelte";
 	import HMS from "../components/hms.svelte";
 	import Button from "../components/button.svelte";
 
-	let tags = NodeID3.read(file_path);
+	const NodeID3 = require("node-id3")
+
+	const { dialog } = require('electron').remote
+
+	const dispatch = createEventDispatcher()
+
+	export let file_path = "";
+
+	const tags = NodeID3.read(file_path);
 
 	let title = tags.title;
 	let artist = tags.artist;
@@ -23,62 +23,45 @@
 	let genre = tags.genre;
 	let trackNumber = tags.trackNumber;
 	let performerInfo = tags.performerInfo
-	let image = tags.image != undefined ? tags.image.imageBuffer : undefined;
-	let image_mime = tags.image != undefined ? tags.image.mime : undefined;
+	let image = (tags.image || {}).imageBuffer;
+	let image_mime = (tags.image || {}).mime;
 
-	let chapter_list = tags.chapter || [];
+	const chapter_list = tags.chapter || [];
 
 	chapter_list.forEach((c, i) => {
-		if (c.tags.image != undefined) {
-			chapter_list[i].img = {
-				imageBuffer: c.tags.image.imageBuffer,
-				mime: c.tags.image.mime
-			}
-		} else {
-			chapter_list[i].img = {
-				imageBuffer: undefined,
-				mime: undefined
-			}
-		}
-
-		if (chapter_list[i].tags == undefined) {
-			chapter_list[i].tags = {};
-		}
+		chapter_list[i].img = (c.tags || {}).image || {}
+		chapter_list[i].tags = chapter_list[i].tags || {};
 	})
 
 	function addChapter() {
-		let new_chapter = {
-			elementID: "" + Date.now(),
-			startTimeMs: 1,
-			endTimeMs: 1000,
-			tags: {
-				title: ""
-			},
-			img: {
-				imageBuffer: undefined,
-				mime: undefined
-			}
-		}
-
-		chapter_list.push(new_chapter)
-		chapter_list = chapter_list;
+		chapter_list.push(
+      {
+        elementID: Date.now().toString(),
+        startTimeMs: 1,
+        endTimeMs: 1000,
+        tags: {
+          title: ""
+        },
+        img: {}
+      }
+    )
+    chapter_list = chapter_list;
 	}
 
 	function saveTag() {
-		let new_tags = {...tags}
-
-		new_tags = {
-			title: title,
-			artist: artist,
-			album: album,
-			year: "" + year,
-			composer: composer,
-			genre: genre,
-			trackNumber: trackNumber,
-			performerInfo: performerInfo
+		const new_tags = {
+      ...tags,
+			title,
+			artist,
+			album,
+			year: year.toString(),
+			composer,
+			genre,
+			trackNumber,
+			performerInfo
 		}
 
-		if (image != undefined) {
+		if (image) {
 			new_tags.image = {
 				mime: image_mime,
 				type: {
@@ -90,9 +73,9 @@
 			}
 		}
 
-		if (chapter_list.length != 0) {
-			chapter_list.forEach((c, i) => {
-				if (c.img.imageBuffer != undefined) {
+		if (chapter_list.length > 0) {
+			new_tags.chapter = chapter_list.map((c, i) => {
+				if (c.img.imageBuffer !== undefined) {
 					c.tags.image = {
 						mime: c.img.mime,
 						type: {
@@ -106,35 +89,19 @@
 
 				c.elementID = "chap" + i
 
-				chapter_list[i] = c;
+        return c;
 			})
-
-			new_tags.chapter = chapter_list;
-
-			let success = NodeID3.write(new_tags, file_path)
-
-			if (success) {
-				dialog.showMessageBox(undefined, {
-					type: "info",
-					title: "Tags sauvegardés!",
-					message: "Tous les tags ont été sauvegardés dans votre fichier!"
-				})
-			}
-		} else {
-			let success = NodeID3.write(new_tags, file_path)
-
-			if (success) {
-				dialog.showMessageBox(undefined, {
-					type: "info",
-					title: "Tags sauvegardés!",
-					message: "Tous les tags ont été sauvegardés dans votre fichier!"
-				})
-			}
 		}
-	}
 
-	function parseImg(img, normalImg) {
-		return img != undefined ? normalImg : undefined;
+    const success = NodeID3.write(new_tags, file_path)
+
+    if (success) {
+      dialog.showMessageBox({
+        type: "info",
+        title: "Tags sauvegardés !",
+        message: "Tous les tags ont été sauvegardés dans votre fichier !"
+      })
+    }
 	}
 
 	function backToFileSelect() {
@@ -142,27 +109,27 @@
 	}
 
 	function up(e) {
-		let pos = e.target.parentElement.attributes.index_chap.nodeValue;
-		move(chapter_list, pos, pos-1)
-		chapter_list = chapter_list;
+		const pos = e.target.parentElement.attributes.index_chap.nodeValue;
+		move(chapter_list, pos, pos-1);
+    chapter_list = chapter_list;
 	}
 
 	function deleteChap(e) {
 		chapter_list.splice(e.target.parentElement.attributes.index_chap.nodeValue, 1);
-		chapter_list = chapter_list;
+    chapter_list = chapter_list;
 	}
 
 	function down(e) {
-		let pos = e.target.parentElement.attributes.index_chap.nodeValue;
+		const pos = e.target.parentElement.attributes.index_chap.nodeValue;
 		move(chapter_list, pos, pos+1)
-		chapter_list = chapter_list;
+    chapter_list = chapter_list;
 	}
 
 	function move(arr, old_index, new_index) {
-		if (new_index < 0 || new_index >= arr.length) return arr;
+		if (new_index < 0 || new_index >= arr.length) return;
 
 		arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);  
-		return arr;
+    chapter_list = chapter_list;
 	}
 </script>
 
@@ -203,7 +170,7 @@
 		justify-content: space-between;
 	}
 
-	.tripe input {
+	.triple input {
 		margin: 5px;
 	}
 
@@ -231,7 +198,7 @@
 <Button on:click={backToFileSelect} text="Changer de fichier" />
 
 <Text placeholder="Titre" bind:value="{title}" name="title" />
-<Text placeholder="Interprete" bind:value="{artist}" name="artist" />
+<Text placeholder="Interprète" bind:value="{artist}" name="artist" />
 <Text placeholder="Album" bind:value="{album}" name="album" />
 <div class="triple">
 	<Text placeholder="Année" bind:value="{year}" name="year" type="number" />

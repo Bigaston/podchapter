@@ -1,28 +1,26 @@
 <script>
-	export let name;
+	import FileSelect from "./pages/file_select.svelte"
+	import ChapterEditor from "./pages/chapter_editor.svelte"
+
+	let file_chosed = false;
+
+	let file_path = "";
+
+	function fileChosed(e) {
+		file_path = e.detail;
+		file_chosed = true;
+	}
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
 	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+		text-align: center;
 	}
 </style>
+
+<h1>PodChapter</h1>
+{#if !file_chosed}
+	<FileSelect on:file={fileChosed} />
+{:else}
+	<ChapterEditor {file_path}/>
+{/if}

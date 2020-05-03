@@ -19,11 +19,11 @@ const createWindow = () => {
     width: 500,
     height: 550,
     webPreferences: {
-      nodeIntegration: true
+	  	nodeIntegration: true,
+		devTools: false
 	},
 	titre: "Podchapter",
-	autoHideMenuBar: true,
-	devTools: false
+	autoHideMenuBar: true
   });
 
   // and load the index.html of the app.

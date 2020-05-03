@@ -1,1 +1,0 @@
-ffmpeg -i audioin.mp3 -f ffmetadata %~dp0\metadata.txt

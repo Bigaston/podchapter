@@ -23,7 +23,7 @@ const createWindow = () => {
 	},
 	titre: "Podchapter",
 	autoHideMenuBar: true,
-	//devTools: false
+	devTools: false
   });
 
   // and load the index.html of the app.

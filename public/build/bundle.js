@@ -491,31 +491,48 @@ var app = (function () {
     const file = "src\\pages\\file_select.svelte";
 
     function create_fragment(ctx) {
-    	let input;
+    	let div;
+    	let p;
+    	let t0;
+    	let br;
+    	let t1;
     	let dispose;
 
     	const block = {
     		c: function create() {
-    			input = element("input");
-    			attr_dev(input, "type", "file");
-    			attr_dev(input, "accept", "audio/mpeg");
-    			add_location(input, file, 16, 0, 240);
+    			div = element("div");
+    			p = element("p");
+    			t0 = text("Déposez un fichier .mp3 ici");
+    			br = element("br");
+    			t1 = text("\r\n\t\t(Ou cliquez pour ouvrir un selectionneur de fichier)");
+    			add_location(br, file, 47, 31, 918);
+    			attr_dev(p, "class", "svelte-1xl3v9j");
+    			add_location(p, file, 47, 1, 888);
+    			attr_dev(div, "id", "drop_zone");
+    			attr_dev(div, "class", "svelte-1xl3v9j");
+    			add_location(div, file, 46, 0, 822);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, input, anchor);
-    			/*input_binding*/ ctx[3](input);
-    			dispose = listen_dev(input, "change", /*fileUploaded*/ ctx[1], false, false, false);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, p);
+    			append_dev(p, t0);
+    			append_dev(p, br);
+    			append_dev(p, t1);
+
+    			dispose = [
+    				listen_dev(div, "click", /*openFileChoser*/ ctx[0], false, false, false),
+    				listen_dev(div, "drop", onDrop, false, false, false)
+    			];
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(input);
-    			/*input_binding*/ ctx[3](null);
-    			dispose();
+    			if (detaching) detach_dev(div);
+    			run_all(dispose);
     		}
     	};
 
@@ -530,36 +547,51 @@ var app = (function () {
     	return block;
     }
 
+    function onDrop(e) {
+    	console.log(e);
+    }
+
     function instance($$self, $$props, $$invalidate) {
+    	const { dialog } = require("electron").remote;
     	const dispatch = createEventDispatcher();
-    	let file_input;
+    	let file_path;
+    	let drop_zone;
 
     	function fileUploaded() {
-    		dispatch("file", file_input.files[0].path);
+    		dispatch("file", file_path);
     	}
 
-    	function input_binding($$value) {
-    		binding_callbacks[$$value ? "unshift" : "push"](() => {
-    			$$invalidate(0, file_input = $$value);
+    	function openFileChoser() {
+    		file_path = dialog.showOpenDialogSync(undefined, {
+    			filters: [{ name: "Fichier MP3", extensions: ["mp3"] }]
     		});
     	}
 
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
+    		onMount,
+    		dialog,
     		dispatch,
-    		file_input,
-    		fileUploaded
+    		file_path,
+    		drop_zone,
+    		fileUploaded,
+    		openFileChoser,
+    		onDrop,
+    		require,
+    		undefined,
+    		console
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("file_input" in $$props) $$invalidate(0, file_input = $$props.file_input);
+    		if ("file_path" in $$props) file_path = $$props.file_path;
+    		if ("drop_zone" in $$props) drop_zone = $$props.drop_zone;
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [file_input, fileUploaded, dispatch, input_binding];
+    	return [openFileChoser];
     }
 
     class File_select extends SvelteComponentDev {

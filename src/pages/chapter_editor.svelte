@@ -11,7 +11,7 @@
 	import Text from "../components/text.svelte";
 	import Cover from "../components/cover.svelte";
 	import HMS from "../components/hms.svelte";
-	//import Button from "../components/button.svelte";
+	import Button from "../components/button.svelte";
 
 	let tags = NodeID3.read(file_path);
 
@@ -140,6 +140,30 @@
 	function backToFileSelect() {
 		dispatch("back")
 	}
+
+	function up(e) {
+		let pos = e.target.parentElement.attributes.index_chap.nodeValue;
+		move(chapter_list, pos, pos-1)
+		chapter_list = chapter_list;
+	}
+
+	function deleteChap(e) {
+		chapter_list.splice(e.target.parentElement.attributes.index_chap.nodeValue, 1);
+		chapter_list = chapter_list;
+	}
+
+	function down(e) {
+		let pos = e.target.parentElement.attributes.index_chap.nodeValue;
+		move(chapter_list, pos, pos+1)
+		chapter_list = chapter_list;
+	}
+
+	function move(arr, old_index, new_index) {
+		if (new_index < 0 || new_index >= arr.length) return arr;
+
+		arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);  
+		return arr;
+	}
 </script>
 
 <style>
@@ -162,6 +186,13 @@
 	.chapter > div {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.left {
+		width: 100px;
+	}
+
+	.right {
 		width: 100%;
 		margin-left: 10px;
 	}
@@ -175,9 +206,29 @@
 	.tripe input {
 		margin: 5px;
 	}
+
+	h2 {
+		text-align: center;
+	}
+
+	.icon {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-top: 5px;
+	}
+
+	.icon img {
+		width: 25px;
+		height: 25px;
+	}
+
+	.icon img:hover {
+		cursor: pointer;
+	}
 </style>
 
-<button on:click={backToFileSelect}>Changer de fichier</button>
+<Button on:click={backToFileSelect} text="Changer de fichier" />
 
 <Text placeholder="Titre" bind:value="{title}" name="title" />
 <Text placeholder="Interprete" bind:value="{artist}" name="artist" />
@@ -192,13 +243,21 @@
 
 <Cover bind:image={image} bind:image_mime={image_mime} />
 
-<h2>Les Chapitres</h2>
+<h2>🔖 Les Chapitres</h2>
 
 <div class="chapter_list">
-	{#each chapter_list as chap (chap.elementID)}
+	{#each chapter_list as chap, index (chap.elementID)}
 		<div class="chapter">
-			<Cover bind:image={chap.img.imageBuffer} bind:image_mime={chap.img.mime} size="100px" />
-			<div>
+			<div class="left">
+				<Cover bind:image={chap.img.imageBuffer} bind:image_mime={chap.img.mime} size="100px" />
+				<div class="icon" index_chap={index}>
+					<img src="./img/up.svg" alt="Monter" on:click={up}/>
+					<img src="./img/trash.svg" alt="Supprimer" on:click={deleteChap}/>
+					<img src="./img/down.svg" alt="Descendre" on:click={down}/>
+
+				</div>
+			</div>
+			<div class="right">
 				<Text placeholder="Titre du chapitre" name="title-{chap.elementID}" bind:value={chap.tags.title}/>
 				<HMS placeholder="Début" name="start-{chap.elementID}" bind:ms={chap.startTimeMs} />
 				<HMS placeholder="Fin" name="end-{chap.elementID}" bind:ms={chap.endTimeMs} />
@@ -207,6 +266,5 @@
 	{/each}
 </div>
 
-<button on:click={addChapter}>Ajouter un chapitre</button>
-
-<button on:click={saveTag}>Sauvegarder</button>
+<Button on:click={addChapter} text="Ajouter un chapitre" />
+<Button on:click={saveTag} text="Sauvegarder" />

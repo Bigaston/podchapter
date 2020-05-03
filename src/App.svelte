@@ -16,11 +16,17 @@
 	h1 {
 		text-align: center;
 	}
+
+	.wrapper {
+		padding: 10px;
+	}
 </style>
 
-<h1>PodChapter</h1>
-{#if !file_chosed}
-	<FileSelect on:file={fileChosed} />
-{:else}
-	<ChapterEditor {file_path} on:back={() => {file_path = undefined; file_chosed = false}}/>
-{/if}
+<div class="wrapper">
+	<h1>PodChapter</h1>
+	{#if !file_chosed}
+		<FileSelect on:file={fileChosed} />
+	{:else}
+		<ChapterEditor {file_path} on:back={() => {file_path = undefined; file_chosed = false}}/>
+	{/if}
+</div>

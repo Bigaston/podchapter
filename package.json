@@ -1,7 +1,7 @@
 {
   "name": "podchapter",
   "productName": "podchapter",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Outils pour ajouter des chapitres à votre épisode",
   "main": "src/index.js",
   "scripts": {
@@ -42,6 +42,7 @@
     }
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "node-id3": "^0.1.16"
   },
   "devDependencies": {
@@ -56,7 +57,6 @@
     "cross-env": "^7.0.2",
     "electron": "8.0.2",
     "electron-reload": "^1.5.0",
-    "electron-squirrel-startup": "^1.0.0",
     "rollup": "^1.32.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",

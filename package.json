@@ -6,8 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\"",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "package": "cross-env-shell NODE_ENV=production \"npm run svelte-build && electron-forge package\"",
+    "make": "cross-env-shell NODE_ENV=production \"npm run svelte-build && electron-forge make\"",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "svelte-build": "rollup -c",
@@ -22,10 +22,7 @@
       "packagerConfig": {},
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "crawler"
-          }
+          "name": "@electron-forge/maker-squirrel"
         },
         {
           "name": "@electron-forge/maker-zip",
@@ -45,10 +42,7 @@
     }
   },
   "dependencies": {
-    "electron-reload": "^1.5.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "node-id3": "^0.1.16",
-    "sirv-cli": "^0.4.4"
+    "node-id3": "^0.1.16"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.50",
@@ -59,11 +53,15 @@
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "concurrently": "^5.1.0",
+    "cross-env": "^7.0.2",
     "electron": "8.0.2",
+    "electron-reload": "^1.5.0",
+    "electron-squirrel-startup": "^1.0.0",
     "rollup": "^1.32.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
+    "sirv-cli": "^0.4.4",
     "svelte": "^3.19.1"
   }
 }

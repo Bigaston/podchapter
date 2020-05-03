@@ -2,28 +2,27 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 // Live Reload
-require('electron-reload')(__dirname, {
-  electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
-  awaitWriteFinish: true
-});
+if(!app.isPackaged) {
+  require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, '../node_modules', '.bin', 'electron'),
+    awaitWriteFinish: true
+  });
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-  // eslint-disable-line global-require
-  app.quit();
-}
+if (require('electron-squirrel-startup')) return;
 
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 500,
+    width: app.isPackaged ? 500 : 1100,
     height: 550,
     webPreferences: {
-      nodeIntegration: true
-	},
-	titre: "Podchapter",
-	autoHideMenuBar: true,
-	devTools: false
+      nodeIntegration: true,
+      devTools: !app.isPackaged
+    },
+    title: "Podchapter",
+    autoHideMenuBar: true
   });
 
   // and load the index.html of the app.

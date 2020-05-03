@@ -29,8 +29,8 @@
 	const chapter_list = tags.chapter || [];
 
 	chapter_list.forEach((c, i) => {
-		chapter_list[i].img = c.tags.image || {}
-    chapter_list[i].tags = chapter_list[i].tags || {};
+		chapter_list[i].img = (c.tags || {}).image || {}
+		chapter_list[i].tags = chapter_list[i].tags || {};
 	})
 
 	function addChapter() {

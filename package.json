@@ -1,7 +1,7 @@
 {
   "name": "podchapter",
   "productName": "podchapter",
-  "version": "2.1.0",
+  "version": "2.2.3",
   "description": "Outils pour ajouter des chapitres à votre épisode",
   "main": "src/index.js",
   "scripts": {
@@ -78,11 +78,9 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
     "node-id3": "^0.1.16"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "concurrently": "^5.1.0",
@@ -90,10 +88,8 @@
     "electron": "8.0.2",
     "electron-builder": "^22.7.0",
     "electron-reload": "^1.5.0",
-<<<<<<< HEAD
+    "husky": "^4.2.5",
     "prettier": "^2.0.5",
-=======
->>>>>>> 68b58a8... Correction build
     "rollup": "^1.32.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",

@@ -34,8 +34,4 @@ script:
       yarn build && yarn dist
     fi
 before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
-
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
+ - rm -rf $HOME/.cache/electron-builder/wine

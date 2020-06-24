@@ -9,44 +9,65 @@
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public",
     "build": "rollup -c",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "release": "electron-forge publish"
+    "release": "electron-builder"
   },
   "keywords": [],
-  "author": "Bigaston",
+  "author": "Bigaston <bonsoir@bigaston.me>",
+  "contributors": [
+    {
+      "name": "Pof Magicfingers",
+      "email": "pof@pof.pm"
+    }
+  ],
   "license": "MIT",
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel"
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
+  "build": {
+    "appId": "dev.bigaston.podchapter",
+    "productName": "PodChapter",
+    "win": {
+      "target": [
+        "nsis",
+        "nsis-web",
+        "portable",
+        "msi"
       ],
-      "publishers": [
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "snap",
+        "rpm",
+        "deb",
+        "pacman"
+      ],
+      "executableName": "podchapter",
+      "category": "Audio",
+      "publish": [
+        "github"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.utilities",
+      "publish": [
+        "github"
+      ]
+    },
+    "dmg": {
+      "contents": [
         {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "Bigaston",
-              "name": "PodChapter"
-            }
-          }
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
         }
       ]
     }
@@ -55,19 +76,13 @@
     "node-id3": "^0.1.16"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.50",
-    "@electron-forge/maker-deb": "^6.0.0-beta.50",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.50",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.50",
-    "@electron-forge/maker-zip": "^6.0.0-beta.50",
-    "@electron-forge/publisher-github": "^6.0.0-beta.51",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
     "electron": "8.0.2",
+    "electron-builder": "^22.7.0",
     "electron-reload": "^1.5.0",
-    "electron-squirrel-startup": "^1.0.0",
     "prettier": "^2.0.5",
     "rollup": "^1.32.0",
     "rollup-plugin-livereload": "^1.0.0",

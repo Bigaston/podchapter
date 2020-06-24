@@ -9,9 +9,6 @@ if(!app.isPackaged) {
   });
 }
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) return;
-
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({

@@ -5,21 +5,21 @@ const pkg = require("../package.json");
 const template = `
 ### Windows
 
-- [Installer](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/PodChapter-Setup-${pkg.version}.exe)
-- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/PodChapter-Web-Setup-${pkg.version}.exe)
-- [Portable](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/PodChapter-${pkg.version}.exe)
+- [Installer](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/PodChapter-Setup-${pkg.version}.exe)
+- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/PodChapter-Web-Setup-${pkg.version}.exe)
+- [Portable](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/PodChapter-${pkg.version}.exe)
 
 ### Mac
 
-- [DMG](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/PodChapter-${pkg.version}.dmg)
+- [DMG](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/PodChapter-${pkg.version}.dmg)
 
 ### Linux
 
-- [AppImage](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/PodChapter-${pkg.version}.AppImage)
-- [snap](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/podchapter-${pkg.version}.snap)
-- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/podchapter-${pkg.version}.deb)
-- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/podchapter-${pkg.version}.x86_64.deb)
-- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/${pkg.version}/podchapter-${pkg.version}.pacman)
+- [AppImage](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/PodChapter-${pkg.version}.AppImage)
+- [snap](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/podchapter-${pkg.version}.snap)
+- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/podchapter-${pkg.version}.deb)
+- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/podchapter-${pkg.version}.x86_64.deb)
+- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/v${pkg.version}/podchapter-${pkg.version}.pacman)
 `;
 
 const README = path.resolve(__dirname, "../README.md");

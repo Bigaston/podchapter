@@ -13,21 +13,21 @@ L'application est codée en Electron ce qui la rend un peu plus lourde et plus l
 
 ### Windows
 
-- [Installer](https://github.com/Bigaston/podchapter/releases/download/latest/PodChapter-Setup-2.2.1.exe)
-- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/latest/PodChapter-Web-Setup-2.2.1.exe)
-- [Portable](https://github.com/Bigaston/podchapter/releases/download/latest/PodChapter-2.2.1.exe)
+- [Installer](https://github.com/Bigaston/podchapter/releases/download/2.2.3/PodChapter-Setup-2.2.3.exe)
+- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/2.2.3/PodChapter-Web-Setup-2.2.3.exe)
+- [Portable](https://github.com/Bigaston/podchapter/releases/download/2.2.3/PodChapter-2.2.3.exe)
 
 ### Mac
 
-- [DMG](https://github.com/Bigaston/podchapter/releases/download/latest/PodChapter-2.2.1.dmg)
+- [DMG](https://github.com/Bigaston/podchapter/releases/download/2.2.3/PodChapter-2.2.3.dmg)
 
 ### Linux
 
-- [AppImage](https://github.com/Bigaston/podchapter/releases/download/latest/PodChapter-2.2.1.AppImage)
-- [snap](https://github.com/Bigaston/podchapter/releases/download/latest/podchapter-2.2.1.snap)
-- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/latest/podchapter-2.2.1.deb)
-- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/latest/podchapter-2.2.1.x86_64.deb)
-- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/latest/podchapter-2.2.1.pacman)
+- [AppImage](https://github.com/Bigaston/podchapter/releases/download/2.2.3/PodChapter-2.2.3.AppImage)
+- [snap](https://github.com/Bigaston/podchapter/releases/download/2.2.3/podchapter-2.2.3.snap)
+- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/2.2.3/podchapter-2.2.3.deb)
+- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/2.2.3/podchapter-2.2.3.x86_64.deb)
+- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/2.2.3/podchapter-2.2.3.pacman)
 
 <!--RELEASE_LINKS_END-->
 

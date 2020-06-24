@@ -9,7 +9,7 @@
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public",
     "build": "rollup -c",
-    "release": "electron-builder"
+    "dist": "electron-builder"
   },
   "keywords": [],
   "author": "Bigaston <bonsoir@bigaston.me>",

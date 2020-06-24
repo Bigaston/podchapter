@@ -52,6 +52,6 @@
 </div>
 
 <div class="footer">
-	<p>PodChapter est développé par <a href="https://twitter.com/Bigaston" on:click={openLink}>Bigaston</a></p>
+	<p>PodChapter est développé par <a href="https://twitter.com/Bigaston" on:click={openLink}>Bigaston</a> avec l'aide de <a href="https://twitter.com/PofMagicfingers" on:click={openLink}>PofMagicfingers</a></p>
 	<p>⌨️ <a href="https://github.com/Bigaston/podchapter" on:click={openLink}>Code Source</a> | 💸 <a href="https://utip.io/bigaston" on:click={openLink}>Me soutenir</a></p>
 </div>

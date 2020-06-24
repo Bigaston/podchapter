@@ -99,7 +99,8 @@
       dialog.showMessageBox({
         type: "info",
         title: "Tags sauvegardés !",
-        message: "Tous les tags ont été sauvegardés dans votre fichier !"
+        message: "Tous les tags ont été sauvegardés dans votre fichier !",
+        buttons: ["OK"]
       })
     }
 	}
@@ -128,7 +129,7 @@
 	function move(arr, old_index, new_index) {
 		if (new_index < 0 || new_index >= arr.length) return;
 
-		arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);  
+		arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
     chapter_list = chapter_list;
 	}
 </script>

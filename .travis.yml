@@ -11,6 +11,16 @@ matrix:
     - os: linux
       services: docker
       language: generic
+      env:
+        - BUILDER_IMAGE=electronuserland/builder
+        - BUILD_PLATFORM=linux
+
+    - os: linux
+      services: docker
+      language: generic
+      env:
+        - BUILDER_IMAGE=electronuserland/builder:wine
+        - BUILD_PLATFORM=win32
 
 cache:
   yarn: true
@@ -27,9 +37,9 @@ script:
         -v ${PWD}:/project \
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
-        electronuserland/builder:wine \
+        $BUILDER_IMAGE \
         /bin/bash -c "yarn --link-duplicates --pure-lockfile && \
-                      yarn make --linux --win && \
+                      yarn make -p $BUILD_PLATFORM && \
                       yarn release --from-dry-run"
     else
       yarn release

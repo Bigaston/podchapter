@@ -1,7 +1,7 @@
 {
   "name": "podchapter",
   "productName": "podchapter",
-  "version": "2.2.4",
+  "version": "2.3.0",
   "description": "Outils pour ajouter des chapitres à votre épisode",
   "main": "src/index.js",
   "scripts": {

@@ -38,18 +38,21 @@
 	})
 
 	function addChapter() {
+        const last_chapter = chapter_list[chapter_list.length-1] || { endTimeMs: 0}
+
 		chapter_list.push(
-      {
-        elementID: Date.now().toString(),
-        startTimeMs: 1,
-        endTimeMs: 1000,
-        tags: {
-          title: ""
-        },
-        img: {}
-      }
-    )
-    chapter_list = chapter_list;
+          {
+            elementID: Date.now().toString(),
+            startTimeMs: last_chapter.endTimeMs,
+            endTimeMs: last_chapter.endTimeMs+30000,
+            tags: {
+              title: ""
+            },
+            img: {}
+          }
+        )
+
+        chapter_list = chapter_list;
 	}
 
 	function saveTag() {
@@ -141,8 +144,7 @@
 <style>
 	.chapter_list {
 		width: 100%;
-		max-height: 500px;
-		overflow-y: scroll;
+        margin-bottom: 40px;
 	}
 
 	.chapter:not(:last-child) {

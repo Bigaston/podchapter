@@ -20,7 +20,10 @@ cache:
     - $HOME/.cache/electron-builder
 
 script:
+  - if [ -n "$TRAVIS_TAG" ]; then echo "Tagged build detected"; else echo "No tagged build detected"; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Master branch build detected"; else echo "No master branch build detected"; fi
   - |
+    BUILD_PUBLISH="-p $( ([ \"$TRAVIS_BRANCH\" == \"master\" ] || [ -n "$TRAVIS_TAG" ] ) && echo \"always\" || echo \"onTagOrDraft\")" ;
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       docker run --rm \
         --env-file <(env | grep -v '\r' | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
@@ -29,13 +32,9 @@ script:
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
         /bin/bash -c "yarn --link-duplicates --pure-lockfile && \
-                      yarn build && yarn dist --win --linux"
+                      yarn build && yarn dist --win --linux $BUILD_PUBLISH"
     else
-      yarn build && yarn dist
+      yarn build && yarn dist $BUILD_PUBLISH
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
-
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"

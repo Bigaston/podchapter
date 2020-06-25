@@ -5,6 +5,10 @@
 	import HMS from "../components/hms.svelte";
 	import Button from "../components/button.svelte";
 
+    import IconifyIcon from "@iconify/svelte";
+    import bookmarkIcon from "@iconify/icons-twemoji/bookmark";
+    import pencilIcon from "@iconify/icons-twemoji/pencil";
+
 	const NodeID3 = require("node-id3")
 
 	const { dialog } = require('electron').remote
@@ -198,6 +202,8 @@
 
 <Button on:click={backToFileSelect} text="Changer de fichier" />
 
+<h2><IconifyIcon icon={pencilIcon} inline={true} /> Informations</h2>
+
 <Text placeholder="Titre" bind:value="{title}" name="title" />
 <Text placeholder="Interprète" bind:value="{artist}" name="artist" />
 <Text placeholder="Album" bind:value="{album}" name="album" />
@@ -211,7 +217,7 @@
 
 <Cover bind:image={image} bind:image_mime={image_mime} />
 
-<h2>🔖 Les Chapitres</h2>
+<h2><IconifyIcon icon={bookmarkIcon} inline={true} /> Chapitres</h2>
 
 <div class="chapter_list">
 	{#each chapter_list as chap, index (chap.elementID)}

@@ -45,8 +45,7 @@
         "snap",
         "rpm",
         "deb",
-        "pacman",
-        "apk"
+        "pacman"
       ],
       "icon": "./build/icon.png",
       "executableName": "podchapter",

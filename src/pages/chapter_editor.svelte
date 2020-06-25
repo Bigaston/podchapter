@@ -5,6 +5,13 @@
 	import HMS from "../components/hms.svelte";
 	import Button from "../components/button.svelte";
 
+    import IconifyIcon from "@iconify/svelte";
+    import fileFolderIcon from "@iconify/icons-twemoji/file-folder";
+    import bookmarkIcon from "@iconify/icons-twemoji/bookmark";
+    import pencilIcon from "@iconify/icons-twemoji/pencil";
+    import whiteFlagIcon from "@iconify/icons-twemoji/white-flag";
+    import checkmarkIcon from "@iconify/icons-twemoji/check-mark-button";
+
 	const NodeID3 = require("node-id3")
 
 	const { dialog } = require('electron').remote
@@ -34,18 +41,21 @@
 	})
 
 	function addChapter() {
+        const last_chapter = chapter_list[chapter_list.length-1] || { endTimeMs: 0}
+
 		chapter_list.push(
-      {
-        elementID: Date.now().toString(),
-        startTimeMs: 1,
-        endTimeMs: 1000,
-        tags: {
-          title: ""
-        },
-        img: {}
-      }
-    )
-    chapter_list = chapter_list;
+          {
+            elementID: Date.now().toString(),
+            startTimeMs: last_chapter.endTimeMs,
+            endTimeMs: last_chapter.endTimeMs+30000,
+            tags: {
+              title: ""
+            },
+            img: {}
+          }
+        )
+
+        chapter_list = chapter_list;
 	}
 
 	function saveTag() {
@@ -137,8 +147,7 @@
 <style>
 	.chapter_list {
 		width: 100%;
-		max-height: 500px;
-		overflow-y: scroll;
+        margin-bottom: 40px;
 	}
 
 	.chapter:not(:last-child) {
@@ -196,7 +205,11 @@
 	}
 </style>
 
-<Button on:click={backToFileSelect} text="Changer de fichier" />
+<Button on:click={backToFileSelect}>
+<IconifyIcon icon={fileFolderIcon} inline={true} /> Changer de fichier
+</Button>
+
+<h2><IconifyIcon icon={pencilIcon} inline={true} /> Informations</h2>
 
 <Text placeholder="Titre" bind:value="{title}" name="title" />
 <Text placeholder="Interprète" bind:value="{artist}" name="artist" />
@@ -211,7 +224,7 @@
 
 <Cover bind:image={image} bind:image_mime={image_mime} />
 
-<h2>🔖 Les Chapitres</h2>
+<h2><IconifyIcon icon={bookmarkIcon} inline={true} /> Chapitres</h2>
 
 <div class="chapter_list">
 	{#each chapter_list as chap, index (chap.elementID)}
@@ -234,5 +247,9 @@
 	{/each}
 </div>
 
-<Button on:click={addChapter} text="Ajouter un chapitre" />
-<Button on:click={saveTag} text="Sauvegarder" />
+<Button on:click={addChapter}>
+<IconifyIcon icon={whiteFlagIcon} inline={true} /> Ajouter un chapitre
+</Button>
+<Button on:click={saveTag}>
+<IconifyIcon icon={checkmarkIcon} inline={true} /> Sauvegarder
+</Button>

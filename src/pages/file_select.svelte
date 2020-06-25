@@ -4,6 +4,9 @@
 
   import Button from "../components/button.svelte"
 
+  import IconifyIcon from "@iconify/svelte";
+  import openFileIcon from "@iconify/icons-twemoji/open-file-folder";
+
   const dispatch = createEventDispatcher();
 
   let file_path;
@@ -17,4 +20,7 @@
   }
 </script>
 
-<Button text="Sélectionner un fichier" on:click={openFileChoser} />
+<Button on:click={openFileChoser}>
+	<IconifyIcon icon={openFileIcon} inline={true} />
+    Sélectionner un fichier
+</Button>

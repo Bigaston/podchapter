@@ -1,11 +1,11 @@
 {
   "name": "podchapter",
   "productName": "podchapter",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Outils pour ajouter des chapitres à votre épisode",
   "main": "src/index.js",
   "scripts": {
-    "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\"",
+    "start": "concurrently \"npm:svelte-dev\" \"electron src/index.js\"",
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public",
     "build": "rollup -c",
@@ -47,6 +47,7 @@
         "deb",
         "pacman"
       ],
+      "icon": "./build/icon.png",
       "executableName": "podchapter",
       "category": "Audio",
       "publish": [
@@ -81,6 +82,8 @@
     "node-id3": "^0.1.16"
   },
   "devDependencies": {
+    "@iconify/icons-twemoji": "^1.0.10",
+    "@iconify/svelte": "^1.0.0-beta.3",
     "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "concurrently": "^5.1.0",

@@ -66,7 +66,7 @@
 <div class="container">
 	<div on:click={click} class="button" id="btnIndex">
 	 	<div class="buttonlabel">
-			{ text }
-		</div>
+            <slot>{ text }</slot>
+        </div>
 	</div>
 </div>

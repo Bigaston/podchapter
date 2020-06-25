@@ -6,8 +6,11 @@
 	import Button from "../components/button.svelte";
 
     import IconifyIcon from "@iconify/svelte";
+    import fileFolderIcon from "@iconify/icons-twemoji/file-folder";
     import bookmarkIcon from "@iconify/icons-twemoji/bookmark";
     import pencilIcon from "@iconify/icons-twemoji/pencil";
+    import whiteFlagIcon from "@iconify/icons-twemoji/white-flag";
+    import checkmarkIcon from "@iconify/icons-twemoji/check-mark-button";
 
 	const NodeID3 = require("node-id3")
 
@@ -202,7 +205,9 @@
 	}
 </style>
 
-<Button on:click={backToFileSelect} text="Changer de fichier" />
+<Button on:click={backToFileSelect}>
+<IconifyIcon icon={fileFolderIcon} inline={true} /> Changer de fichier
+</Button>
 
 <h2><IconifyIcon icon={pencilIcon} inline={true} /> Informations</h2>
 
@@ -242,5 +247,9 @@
 	{/each}
 </div>
 
-<Button on:click={addChapter} text="Ajouter un chapitre" />
-<Button on:click={saveTag} text="Sauvegarder" />
+<Button on:click={addChapter}>
+<IconifyIcon icon={whiteFlagIcon} inline={true} /> Ajouter un chapitre
+</Button>
+<Button on:click={saveTag}>
+<IconifyIcon icon={checkmarkIcon} inline={true} /> Sauvegarder
+</Button>

@@ -22,7 +22,8 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-commit": "node build/update-readme.js; git add README.md"
+      "pre-commit": "node build/update-readme.js; git add README.md",
+      "commit-msg": "hge-commit"
     }
   },
   "build": {
@@ -92,6 +93,7 @@
     "electron-builder": "^22.7.0",
     "electron-reload": "^1.5.0",
     "husky": "^4.2.5",
+    "husky-git-emoji": "^1.0.0",
     "prettier": "^2.0.5",
     "rollup": "^1.32.0",
     "rollup-plugin-livereload": "^1.0.0",

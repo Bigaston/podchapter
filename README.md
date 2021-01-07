@@ -14,21 +14,21 @@ L'application est codée en Electron ce qui la rend un peu plus lourde et plus l
 
 ### Windows
 
-- [Installer](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/PodChapter-Setup-2.3.0.exe)
-- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/PodChapter-Web-Setup-2.3.0.exe)
-- [Portable](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/PodChapter-2.3.0.exe)
+- [Installer](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/PodChapter-Setup-2.4.0.exe)
+- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/PodChapter-Web-Setup-2.4.0.exe)
+- [Portable](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/PodChapter-2.4.0.exe)
 
 ### Mac
 
-- [DMG](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/PodChapter-2.3.0.dmg)
+- [DMG](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/PodChapter-2.4.0.dmg)
 
 ### Linux
 
-- [AppImage](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/PodChapter-2.3.0.AppImage)
-- [snap](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/podchapter-2.3.0.snap)
-- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/podchapter-2.3.0.deb)
-- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/podchapter-2.3.0.x86_64.deb)
-- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.3.0/podchapter-2.3.0.pacman)
+- [AppImage](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/PodChapter-2.4.0.AppImage)
+- [snap](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/podchapter-2.4.0.snap)
+- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/podchapter-2.4.0.deb)
+- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/podchapter-2.4.0.x86_64.deb)
+- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.4.0/podchapter-2.4.0.pacman)
 
 <!--RELEASE_LINKS_END-->
 

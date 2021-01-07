@@ -12,14 +12,16 @@
 
 
 	function editCover() {
-		let new_image_path = dialog.showOpenDialogSync(undefined, {filters: [
-			{name: "Image", extensions: ["png", "jpg"]}
-		]})
+		let new_image_path = dialog.showOpenDialogSync(undefined, {
+			filters: [
+				{ name: "Image", extensions: ["png", "jpg"] }
+			]
+		})
 
 		if (new_image_path != undefined) {
 			let native = nativeImage.createFromPath(new_image_path[0])
 			image = Buffer.from(native.toJPEG(100))
-			image_mime = "jpeg"
+			image_mime = "image/jpeg"
 			img_url = native.toDataURL()
 		}
 	}

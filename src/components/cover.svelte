@@ -9,17 +9,19 @@
 	const default_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgAgMAAACmHu77AAAADFBMVEXf39+zs7PExMTU1NSQ2M1BAAACzklEQVR42uzBgQAAAACAoP2pF6kCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGB27tgmdiCKwvDg1Qv2SUvmEjZ4BThwtiW8gDusBMEWQEAJ28T0QQluwiUQ0AXyvezaCGFC5hydL0Mk/MHIc8eDRURERERERERERERERERERNb0tiIPCUaxNaeEorFVx4Ria6tyQtHZOphFsrd15wSitXWHBEIhtVFIbRRSG4XUhirk8N3vFPIzhSgkgVBIbfhC3vILRUhvlgeGkGJmJ4KQnZ/GEYR0NhnwQ0abHPBDzJ3gQxpzR/iQnbk7+JCtuQwf8scCfEhnYUAP2Vs4K+TXxR/bWjgo5NcppDZki50mhOaBSLNFodk07szdw4d8Gqz6PMCGpLIYdYs94Ia08/OwmYpgQ+bjIF/4+Ywa0sxLZB+XGUFDFkemo02eUEO2l6fIxsILaMj1tcKNhTyAhny5rfkAHtLZxRN2yGhXBTqE5S5KwxKyYwnpWEJalpBCEuIblFzwQ3yt393ih/gG5TH18CE+jDyn9IoeMn6cN24Kdsjmekz3FzukmU+3/kGHfKz1yaYgh3SLixy3yCGtLX7sgUPKp3cLI2yIr/WMfIjtLvfoCEL8fc9/gpDYoBCEFN+g4IfEMAL9xirc+DBCEBIbFIIQX+sngpAYRghCbIL9enoxjBCE+Fo/EoTEMEIQEsMIQUgMI/ghMYyAX6qZhxGCkBhGCEJiGIEOofnHfIXURCG1UUhtFFIbmhCaj+nRfN6Q5oOTNJ8Apfko6zs7dyADAAAAMMjf+h5fgfRpcgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqD04EAAAAAAQ5G89yBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwH2Lva8nFuuAAAAAABJRU5ErkJggg==";
 
 	let img_url = image && nativeImage.createFromBuffer(image).toDataURL() || default_image;
-	
+
 
 	function editCover() {
-		let new_image_path = dialog.showOpenDialogSync(undefined, {filters: [
-			{name: "Image", extensions: ["png", "jpg"]}
-		]})
+		let new_image_path = dialog.showOpenDialogSync(undefined, {
+			filters: [
+				{ name: "Image", extensions: ["png", "jpg"] }
+			]
+		})
 
 		if (new_image_path != undefined) {
 			let native = nativeImage.createFromPath(new_image_path[0])
 			image = Buffer.from(native.toJPEG(100))
-			image_mime = "jpeg"
+			image_mime = "image/jpeg"
 			img_url = native.toDataURL()
 		}
 	}

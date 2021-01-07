@@ -1,5 +1,5 @@
 <script>
-	import {createEventDispatcher} from "svelte";
+	import { createEventDispatcher } from "svelte";
 	import Text from "../components/text.svelte";
 	import Cover from "../components/cover.svelte";
 	import HMS from "../components/hms.svelte";
@@ -35,22 +35,22 @@
 
 	function addChapter() {
 		chapter_list.push(
-      {
-        elementID: Date.now().toString(),
-        startTimeMs: 1,
-        endTimeMs: 1000,
-        tags: {
-          title: ""
-        },
-        img: {}
-      }
-    )
-    chapter_list = chapter_list;
+			{
+				elementID: Date.now().toString(),
+				startTimeMs: 1,
+				endTimeMs: 1000,
+				tags: {
+					title: ""
+				},
+				img: {}
+			}
+		)
+		chapter_list = chapter_list;
 	}
 
 	function saveTag() {
 		const new_tags = {
-      ...tags,
+			...tags,
 			title,
 			artist,
 			album,
@@ -82,26 +82,39 @@
 							id: 3,
 							name: "front cover"
 						},
-						description: "Cover chapter " + i,
+						description: "Chapter artwork",
 						imageBuffer: c.img.imageBuffer
 					}
 				}
 
 				c.elementID = "chap" + i
 
-        return c;
+				return c;
+			})
+
+			new_tags.tableOfContents = [{
+				elementID: "TOCM",
+				isOrdered: true,
+				elements: [],
+				tags: {
+					title: "Table of contents"
+				}
+			}]
+
+			chapter_list.forEach((c, i) => {
+				new_tags.tableOfContents[0].elements.push("chap" + i);
 			})
 		}
 
-    const success = NodeID3.write(new_tags, file_path)
+		const success = NodeID3.write(new_tags, file_path)
 
-    if (success) {
-      dialog.showMessageBox({
-        type: "info",
-        title: "Tags sauvegardés !",
-        message: "Tous les tags ont été sauvegardés dans votre fichier !"
-      })
-    }
+		if (success) {
+			dialog.showMessageBox({
+				type: "info",
+				title: "Tags sauvegardés !",
+				message: "Tous les tags ont été sauvegardés dans votre fichier !"
+			})
+		}
 	}
 
 	function backToFileSelect() {
@@ -110,26 +123,26 @@
 
 	function up(e) {
 		const pos = e.target.parentElement.attributes.index_chap.nodeValue;
-		move(chapter_list, pos, pos-1);
-    chapter_list = chapter_list;
+		move(chapter_list, pos, pos - 1);
+		chapter_list = chapter_list;
 	}
 
 	function deleteChap(e) {
 		chapter_list.splice(e.target.parentElement.attributes.index_chap.nodeValue, 1);
-    chapter_list = chapter_list;
+		chapter_list = chapter_list;
 	}
 
 	function down(e) {
 		const pos = e.target.parentElement.attributes.index_chap.nodeValue;
-		move(chapter_list, pos, pos+1)
-    chapter_list = chapter_list;
+		move(chapter_list, pos, pos + 1)
+		chapter_list = chapter_list;
 	}
 
 	function move(arr, old_index, new_index) {
 		if (new_index < 0 || new_index >= arr.length) return;
 
-		arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);  
-    chapter_list = chapter_list;
+		arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+		chapter_list = chapter_list;
 	}
 </script>
 
@@ -150,7 +163,7 @@
 		margin-top: 10px
 	}
 
-	.chapter > div {
+	.chapter>div {
 		display: flex;
 		flex-direction: column;
 	}
@@ -214,22 +227,22 @@
 
 <div class="chapter_list">
 	{#each chapter_list as chap, index (chap.elementID)}
-		<div class="chapter">
-			<div class="left">
-				<Cover bind:image={chap.img.imageBuffer} bind:image_mime={chap.img.mime} size="100px" />
-				<div class="icon" index_chap={index}>
-					<img src="./img/up.svg" alt="Monter" on:click={up}/>
-					<img src="./img/trash.svg" alt="Supprimer" on:click={deleteChap}/>
-					<img src="./img/down.svg" alt="Descendre" on:click={down}/>
+	<div class="chapter">
+		<div class="left">
+			<Cover bind:image={chap.img.imageBuffer} bind:image_mime={chap.img.mime} size="100px" />
+			<div class="icon" index_chap={index}>
+				<img src="./img/up.svg" alt="Monter" on:click={up} />
+				<img src="./img/trash.svg" alt="Supprimer" on:click={deleteChap} />
+				<img src="./img/down.svg" alt="Descendre" on:click={down} />
 
-				</div>
-			</div>
-			<div class="right">
-				<Text placeholder="Titre du chapitre" name="title-{chap.elementID}" bind:value={chap.tags.title}/>
-				<HMS placeholder="Début" name="start-{chap.elementID}" bind:ms={chap.startTimeMs} />
-				<HMS placeholder="Fin" name="end-{chap.elementID}" bind:ms={chap.endTimeMs} />
 			</div>
 		</div>
+		<div class="right">
+			<Text placeholder="Titre du chapitre" name="title-{chap.elementID}" bind:value={chap.tags.title} />
+			<HMS placeholder="Début" name="start-{chap.elementID}" bind:ms={chap.startTimeMs} />
+			<HMS placeholder="Fin" name="end-{chap.elementID}" bind:ms={chap.endTimeMs} />
+		</div>
+	</div>
 	{/each}
 </div>
 

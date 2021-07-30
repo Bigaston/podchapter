@@ -8,11 +8,19 @@
   "description": "Un outil pour ajouter des métadonnés et des chapitres à vos MP3!",
   "build": {
     "extends": null,
+    "appId": "dev.bigaston.podchapter",
+    "productName": "PodChapter",
     "files": [
       "build/**/*"
     ],
     "directories": {
       "buildResources": "assets" 
+    },
+    "win": {
+      "target": ["msi", "portable", "zip"]
+    },
+    "linux": {
+      "target": ["AppImage", "snap", "deb", "rpm", "pacman"]
     }
   },
   "dependencies": {

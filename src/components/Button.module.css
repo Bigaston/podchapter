@@ -1,0 +1,26 @@
+.button{
+  background-position: center;
+  background-color: #3052b3;
+  border-radius: 7px;
+  text-decoration: none;
+  border: none;
+  filter: drop-shadow(0px 0px 3px #888);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+
+  /* Texte */
+  color: white;
+  flex-grow: 1;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #4463ba;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.5) );
+}

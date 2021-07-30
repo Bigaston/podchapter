@@ -14,16 +14,28 @@
       "build/**/*"
     ],
     "directories": {
-      "buildResources": "assets" 
+      "buildResources": "assets"
     },
     "win": {
-      "target": ["msi", "portable", "zip"]
+      "target": [
+        "msi",
+        "portable",
+        "zip"
+      ]
     },
     "linux": {
-      "target": ["AppImage", "snap", "deb", "rpm", "pacman"]
+      "target": [
+        "AppImage",
+        "snap",
+        "deb",
+        "rpm",
+        "pacman"
+      ]
     }
   },
   "dependencies": {
+    "@iconify/icons-twemoji": "^1.1.2",
+    "@iconify/react": "^1.1.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",

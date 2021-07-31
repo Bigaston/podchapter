@@ -1,9 +1,23 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain, dialog } from "electron";
+
 import * as path from "path";
 import * as isDev from "electron-is-dev";
+import "./ipc";
 
 let win: BrowserWindow | null = null;
 
+// Gestion des évènements
+
+ipcMain.handle("openFileDialog", (ipcMainEvent, args) => {
+  let file = dialog.showOpenDialogSync({
+    filters: [{ name: "Fichier MP3", extensions: ["mp3"] }],
+    properties: ["openFile"],
+  });
+
+  return file;
+});
+
+// Fenetre principale
 function createWindow() {
   win = new BrowserWindow({
     width: 800,

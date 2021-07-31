@@ -7,10 +7,18 @@ import openFileIcon from "@iconify/icons-twemoji/open-file-folder";
 
 const ipcRenderer = window.require("electron").ipcRenderer;
 
-export default function FileChooser() {
+interface Props {
+  onFileChosed: (file: string) => void;
+}
+
+export default function FileChooser({ onFileChosed }: Props) {
   function handleButtonClick(e: any) {
-    ipcRenderer.invoke("openFileDialog").then((result: string) => {
-      console.log(result);
+    ipcRenderer.invoke("openFileDialog").then((result?: string[]) => {
+      if (result === undefined) {
+        return;
+      }
+
+      onFileChosed(result[0]);
     });
   }
 

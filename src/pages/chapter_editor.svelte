@@ -123,7 +123,7 @@
 			})
 		}
 
-		const success = NodeID3.write(new_tags, file_path)
+		const success = NodeID3.update(new_tags, file_path)
 
 		if (success) {
 			dialog.showMessageBox({

@@ -1,4 +1,4 @@
-name: Build and Release
+name: Release
 
 on:
   push:
@@ -24,7 +24,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: Build/release Electron app
+      - name: Install libarchive-tools for pacman build # Related https://github.com/electron-userland/electron-builder/issues/4181
+        if: startsWith(matrix.os, 'ubuntu')
+        run: sudo apt-get install libarchive-tools
+
+      - name: Build and Release
         uses: samuelmeuli/action-electron-builder@v1
         with:
           # GitHub token, automatically provided to the action

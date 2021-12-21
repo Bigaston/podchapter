@@ -99,6 +99,13 @@
 
 				c.elementID = "chap" + i
 
+				if (!!c.url) {
+					c.tags.userDefinedUrl = [{
+						description: "Chapter URL",
+						url: c.url
+					}]
+				}
+
 				return c;
 			})
 
@@ -116,7 +123,7 @@
 			})
 		}
 
-		const success = NodeID3.write(new_tags, file_path)
+		const success = NodeID3.update(new_tags, file_path)
 
 		if (success) {
 			dialog.showMessageBox({
@@ -259,6 +266,7 @@
 			<Text placeholder="Titre du chapitre" name="title-{chap.elementID}" bind:value={chap.tags.title} />
 			<HMS placeholder="Début" name="start-{chap.elementID}" bind:ms={chap.startTimeMs} />
 			<HMS placeholder="Fin" name="end-{chap.elementID}" bind:ms={chap.endTimeMs} />
+			<Text placeholder="Lien du chapitre" name="url-{chap.elementID}" bind:value={chap.url} />
 		</div>
 	</div>
 	{/each}

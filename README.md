@@ -1,4 +1,4 @@
-# PodChapter [![Build Status](https://travis-ci.org/Bigaston/podchapter.svg?branch=master)](https://travis-ci.org/Bigaston/podchapter)
+# PodChapter [![Build and Release](https://github.com/Bigaston/podchapter/actions/workflows/build.yml/badge.svg)](https://github.com/Bigaston/podchapter/actions/workflows/build.yml)
 
 PodChapter est un petit outil codé à partir de Electron et permetant d'éditer les métadonnés de vos fichier .mp3, ainsi que d'ajouter des chapitres dans ces fichiers
 

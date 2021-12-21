@@ -1,7 +1,7 @@
 {
   "name": "podchapter",
   "productName": "podchapter",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Outils pour ajouter des chapitres à votre épisode",
   "main": "src/index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "license": "MIT",
   "husky": {
     "hooks": {
+      "pre-commit": "node build/update-readme.js; git add README.md",
       "commit-msg": "npx hge-commit"
     }
   },

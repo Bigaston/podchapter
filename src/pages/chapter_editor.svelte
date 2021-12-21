@@ -22,6 +22,8 @@
 
 	const tags = NodeID3.read(file_path);
 
+	console.log("loaded tags:", tags);
+
 	let title = tags.title;
 	let artist = tags.artist;
 	let album = tags.album;
@@ -30,15 +32,40 @@
 	let genre = tags.genre;
 	let trackNumber = tags.trackNumber;
 	let performerInfo = tags.performerInfo
-	let image = (tags.image || {}).imageBuffer;
-	let image_mime = (tags.image || {}).mime;
 
-	const chapter_list = tags.chapter || [];
+	tags.image = tags.image || {};
 
-	chapter_list.forEach((c, i) => {
-		chapter_list[i].img = (c.tags || {}).image || {}
-		chapter_list[i].tags = chapter_list[i].tags || {};
-	})
+	// We need the raw image mime type
+	tags.image.mime = (tags.raw && tags.raw.APIC && tags.raw.APIC.mime) || "image/jpeg";
+
+	if(typeof tags.image.mime === "string" && !tags.image.mime.includes("image/")) {
+		tags.image.mime = "image/" + tags.image.mime;
+	}
+
+	let image = tags.image.imageBuffer;
+	let image_mime = tags.image.mime;
+
+	const seenChapterElementIds = {};
+
+	// We reassign to trigger the update in svelte view cache
+	const chapter_list = [tags.chapter].flat().filter(c => !!c).map((c) => {
+		// Prevents duplicate chapter elementIDs
+		while(seenChapterElementIds[c.elementID]) {
+			const [ _, prefix, number ] = `${c.elementID}`.match(/(.*)([0-9]+)$/)
+			c.elementID = prefix + ((parseInt(number)+1).toString());
+		}
+
+		// Mark chapter elementID as seen
+		seenChapterElementIds[c.elementID] = true;
+
+		// Add some default data
+		c.img = (c.tags || {}).image || {}
+		c.tags = c.tags || {};
+
+		return c;
+	});
+
+	console.log(chapter_list);
 
 	function addChapter() {
 		const last_chapter = chapter_list[chapter_list.length - 1] || { endTimeMs: 0 }
@@ -71,7 +98,8 @@
 			performerInfo
 		}
 
-		if (image) {
+		if (image !== new_tags.image.imageBuffer) {
+			console.log("Updating image");
 			new_tags.image = {
 				mime: image_mime,
 				type: {
@@ -123,7 +151,9 @@
 			})
 		}
 
-		const success = NodeID3.update(new_tags, file_path)
+		console.log("Saving tags:", new_tags);
+
+		const success = NodeID3.write(new_tags, file_path)
 
 		if (success) {
 			dialog.showMessageBox({

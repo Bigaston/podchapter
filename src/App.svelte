@@ -56,7 +56,7 @@
       >Code Source</a
     >
     | <IconifyIcon icon={moneyBagIcon} inline={true} />
-    <a href="https://utip.io/bigaston" on:click={openLink}>Me soutenir</a>
+    <a href="https://patreon.com/bigaston" on:click={openLink}>Me soutenir</a>
   </p>
 </div>
 

@@ -2,7 +2,7 @@
   import FileSelect from "./pages/file_select.svelte";
   import ChapterEditor from "./pages/chapter_editor.svelte";
 
-  const { app, dialog } = require("electron").remote;
+  const { dialog } = require("electron").remote;
 
   import IconifyIcon from "@iconify/svelte";
   import keyboardIcon from "@iconify/icons-twemoji/keyboard";

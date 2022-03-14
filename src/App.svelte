@@ -28,6 +28,27 @@
   }
 
   onMount(() => {
+    console.log(process.env.BUILD_ENV);
+
+    if (process.env.BUILD_ENV !== "pro") {
+      document.title = "PodChapter Free";
+
+      dialog
+        .showMessageBox({
+          message:
+            "PodChapter est un outil gratuit mais vous pouvez l'acheter et soutenir le développement sur Itch.io!",
+          buttons: ["Acheter sur Itch.io", "OK"],
+          cancelId: 1,
+        })
+        .then((res) => {
+          if (res.response === 0) {
+            shell.openExternal("https://bigaston.itch.io/podchapter");
+          }
+        });
+    } else {
+      document.title = "PodChapter Pro";
+    }
+
     fetch("https://api.github.com/repos/Bigaston/podchapter/releases/latest")
       .then((res) => {
         if (res.ok) {

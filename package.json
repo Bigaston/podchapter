@@ -5,11 +5,14 @@
   "description": "Outils pour ajouter des chapitres à votre épisode",
   "main": "src/index.js",
   "scripts": {
-    "start": "concurrently \"npm:svelte-dev\" \"electron src/index.js\"",
+    "start": "cross-env BUILD_ENV=pro concurrently \"npm:svelte-dev\" \"electron src/index.js\"",
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public",
     "build": "rollup -c",
-    "dist": "electron-builder"
+    "buildPro": "cross-env BUILD_ENV=pro rollup -c",
+    "dist": "electron-builder",
+    "distFree": "npm run build && electron-builder",
+    "distPro": "npm run buildPro && electron-builder -c.artifactName=${productName}-Pro-${version}.${ext}"
   },
   "keywords": [],
   "author": "Bigaston <bonsoir@bigaston.me>",
@@ -27,12 +30,11 @@
     }
   },
   "build": {
+    "artifactName": "${productName}-Free-${version}.${ext}",
     "appId": "dev.bigaston.podchapter",
     "productName": "PodChapter",
     "win": {
       "target": [
-        "nsis",
-        "nsis-web",
         "portable",
         "msi"
       ],
@@ -97,6 +99,7 @@
     "husky-git-emoji": "^1.0.1",
     "prettier": "^2.0.5",
     "rollup": "^1.32.0",
+    "rollup-plugin-inject-process-env": "^1.3.1",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",

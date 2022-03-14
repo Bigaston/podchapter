@@ -12,10 +12,13 @@
   import whiteFlagIcon from "@iconify/icons-twemoji/white-flag";
   import checkmarkIcon from "@iconify/icons-twemoji/check-mark-button";
   import openBookIcon from "@iconify/icons-twemoji/open-book";
+  const fs = require("fs");
+
+  const storage = require("electron-json-storage");
 
   const NodeID3 = require("node-id3");
 
-  const { dialog } = require("electron").remote;
+  const { dialog, Menu, MenuItem } = require("electron").remote;
 
   const dispatch = createEventDispatcher();
 
@@ -53,7 +56,7 @@
   const seenChapterElementIds = {};
 
   // We reassign to trigger the update in svelte view cache
-  const chapter_list = [tags.chapter]
+  let chapter_list = [tags.chapter]
     .flat()
     .filter((c) => !!c)
     .map((c) => {
@@ -93,6 +96,74 @@
     chapter_list = chapter_list;
   }
 
+  // Partie importation de chapitres
+  let menuImport = new Menu();
+  menuImport.append(
+    new MenuItem({
+      click: importAudacity,
+      label: "Audacity",
+    })
+  );
+
+  menuImport.append(
+    new MenuItem({
+      click: importReaper,
+      label: "Reaper",
+    })
+  );
+
+  function importAudacity() {
+    if (storage.getSync("hideAudacityMessage") !== true) {
+      dialog
+        .showMessageBox({
+          message: `Exportez votre piste de marqueur depuis "Fichier > Exporter > Exporter les marqueurs" puis selectionnez ce fichier à la prochaine fenêtre`,
+          buttons: ["OK"],
+          checkboxLabel: "Ne plus me montrer ce message",
+        })
+        .then((res) => {
+          console.log(res);
+
+          if (res.checkboxChecked) {
+            storage.set("hideAudacityMessage", true, () => {
+              openMarquerFile();
+            });
+          } else {
+            openMarquerFile();
+          }
+        });
+    } else {
+      openMarquerFile();
+    }
+
+    function openMarquerFile() {
+      let file_path = dialog.showOpenDialogSync(undefined, {
+        filters: [{ name: "Piste de marqueur", extensions: ["txt"] }],
+      });
+
+      const content = fs.readFileSync(file_path[0], "utf-8");
+      chapter_list = content
+        .split("\n")
+        .filter((r) => r !== "")
+        .map((r, index) => {
+          let c = r.split("\t");
+
+          return {
+            elementID: index,
+            tags: { title: c[2] },
+            startTimeMs: Math.trunc(parseFloat(c[0]) * 1000),
+            endTimeMs: Math.trunc(parseFloat(c[1]) * 1000),
+            img: {},
+          };
+        });
+    }
+  }
+  function importReaper() {}
+
+  function importChapter() {
+    menuImport.popup();
+  }
+
+  // Sauvegarde des tags
   function saveTag() {
     const new_tags = {
       ...tags,

@@ -80,6 +80,7 @@
     }
   },
   "dependencies": {
+    "electron-json-storage": "^4.5.0",
     "node-id3": "^0.2.2"
   },
   "devDependencies": {

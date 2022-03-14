@@ -19,6 +19,7 @@
   const NodeID3 = require("node-id3");
 
   const { dialog, Menu, MenuItem } = require("electron").remote;
+  const { shell } = require("electron");
 
   const dispatch = createEventDispatcher();
 
@@ -157,7 +158,20 @@
         });
     }
   }
-  function importReaper() {}
+  function importReaper() {
+    dialog
+      .showMessageBox({
+        message: `Vous pouvez importer vos chapitres directement depuis votre fichier MP3 si vous utilisez Reaper pour monter votre podcast`,
+        buttons: ["Plus d'informations", "OK"],
+      })
+      .then((res) => {
+        if (res.response === 0) {
+          shell.openExternal(
+            "https://podchapter.bigaston.dev/doc/importFromReaper"
+          );
+        }
+      });
+  }
 
   function importChapter() {
     menuImport.popup();

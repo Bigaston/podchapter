@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
+import injectProcessEnv from 'rollup-plugin-inject-process-env';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -35,6 +36,9 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		injectProcessEnv({ 
+			BUILD_ENV: process.env.BUILD_ENV,
+		}),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated

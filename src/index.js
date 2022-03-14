@@ -18,7 +18,7 @@ const createWindow = () => {
       nodeIntegration: true,
       devTools: !app.isPackaged,
     },
-    title: "Podchapter",
+    title: "PodChapter",
     autoHideMenuBar: true,
   });
 

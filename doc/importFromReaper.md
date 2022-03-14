@@ -19,11 +19,13 @@ Ces marqueurs, en plus d'être très utile pour vous repérer pendant le montage
 
 Pour que les marqueurs soient exportés en tant que chapitre, il faudra modifier leurs noms.
 Commencez par double cliquer sur l'icone rouge, puis modifiez le nom pour qu'il commence par **CHAP=**. Le texte ensuite sera celui de votre chapitre.
+
 ![Modifier le titre](./img/reaper_3.png)
 
 ## 3. Exporter ses marqueurs
 
 Enfin, lors du rendu de vos fichiers, cochez la case **Metadata** à la suite de **Embed:**
+
 ![L'export](./img/reaper_4.png)
 
 Et voilà, vos chapitres ajoutés durant votre montage sont dans votre fichier MP3! Plus qu'à ouvrir le fichier dans PodChapter pour éditer plus précisément ces chapitres.

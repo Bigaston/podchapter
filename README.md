@@ -2,6 +2,8 @@
 
 PodChapter est un petit outil codé à partir de Electron et permetant d'éditer les métadonnés de vos fichier .mp3, ainsi que d'ajouter des chapitres dans ces fichiers
 
+Une version payante du logiciel est disponible sur [Itch.io](https://bigaston.itch.io/podchapter), enlevant le message au lancement!
+
 ![Choix du fichier](./img/1.png) ![Edition des métadonnés](./img/2.png) ![Ajout d'une cover ou de chapitres](./img/3.png)
 
 **Pourquoi avoir recommencé le développement de zero?**
@@ -14,28 +16,25 @@ L'application est codée en Electron ce qui la rend un peu plus lourde et plus l
 
 ### Windows
 
-- [Installer](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/PodChapter-Setup-2.5.3.exe)
-- [Web Installer](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/PodChapter-Web-Setup-2.5.3.exe)
-- [Portable](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/PodChapter-2.5.3.exe)
+- [Installer](https://github.com/Bigaston/podchapter/releases/download/v2.5.4/PodChapter-Free-2.5.4.msi)
+- [Portable](https://github.com/Bigaston/podchapter/releases/download/v2.5.4/PodChapter-Free-2.5.4.exe)
 
 ### Mac
 
-- [DMG](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/PodChapter-2.5.3.dmg)
+- [DMG](https://github.com/Bigaston/podchapter/releases/download/v2.5.4/PodChapter-2.5.4.dmg)
 
 ### Linux
 
-- [AppImage](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/PodChapter-2.5.3.AppImage)
-- [snap](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/podchapter-2.5.3.snap)
-- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/podchapter-2.5.3.deb)
-- [rpm (Fedora, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/podchapter-2.5.3.x86_64.deb)
-- [pacman (Archlinux, Manjaro, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/podchapter-2.5.3.pacman)
+- [AppImage](https://github.com/Bigaston/podchapter/releases/download/v2.5.4/PodChapter-Free-2.5.4.AppImage)
+- [deb (Ubuntu, Debian, etc)](https://github.com/Bigaston/podchapter/releases/download/v2.5.4/PodChapter-Free-2.5.4.deb)
 
 <!--RELEASE_LINKS_END-->
 
 Rendez vous dans la partie [Release](https://github.com/Bigaston/podchapter/releases/latest) du dépot GitHub pour tous les liens.
 
 ## Crédits
-Développé par [Bigaston](https://twitter.com/Bigaston) avec l'aide de [PofMagicfingers](https://twitter.com/PofMagicfingers/)
+
+Développé par [Bigaston](https://twitter.com/Bigaston) avec l'aide de [PofMagicfingers](https://twitter.com/PofMagicfingers/)  
 Une partie des composants ont été fait par [Phil_Goud](https://twitter.com/Phil_Goud)
 
-💸 [Me soutenir](https://utip.io/bigaston)
+💸 [Me soutenir](https://patreon.com/bigaston)

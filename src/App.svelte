@@ -2,9 +2,13 @@
   import FileSelect from "./pages/file_select.svelte";
   import ChapterEditor from "./pages/chapter_editor.svelte";
 
+  const { app, dialog } = require("electron").remote;
+
   import IconifyIcon from "@iconify/svelte";
   import keyboardIcon from "@iconify/icons-twemoji/keyboard";
   import moneyBagIcon from "@iconify/icons-twemoji/money-bag";
+
+  import { onMount } from "svelte";
 
   const { shell } = require("electron");
 
@@ -21,6 +25,57 @@
     e.preventDefault();
 
     shell.openExternal(e.target.attributes.href.nodeValue);
+  }
+
+  onMount(() => {
+    fetch("https://api.github.com/repos/Bigaston/podchapter/releases/latest")
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        if (
+          !data.draft &&
+          compareVersion(process.env.npm_package_version, data.name) === -1
+        ) {
+          dialog
+            .showMessageBox({
+              type: "info",
+              title: `Une nouvelle version est disponible! (v${data.name})`,
+              message: `Une nouvelle version de PodChapter est disponible! (v${data.name})`,
+              buttons: [
+                "Télécharger sur Github",
+                "Télécharger sur Itch.io",
+                "OK",
+              ],
+              detail: `Nouveautés:\n${data.body}`,
+              cancelId: 2,
+            })
+            .then((res) => {
+              if (res.response === 0) {
+                shell.openExternal(data.html_url);
+              } else if (res.response === 1) {
+                shell.openExternal("https://bigaston.itch.io/podchapter");
+              }
+            });
+        }
+      });
+  });
+
+  function compareVersion(v1, v2) {
+    if (typeof v1 !== "string") return false;
+    if (typeof v2 !== "string") return false;
+    v1 = v1.split(".");
+    v2 = v2.split(".");
+    const k = Math.min(v1.length, v2.length);
+    for (let i = 0; i < k; ++i) {
+      v1[i] = parseInt(v1[i], 10);
+      v2[i] = parseInt(v2[i], 10);
+      if (v1[i] > v2[i]) return 1;
+      if (v1[i] < v2[i]) return -1;
+    }
+    return v1.length == v2.length ? 0 : v1.length < v2.length ? -1 : 1;
   }
 </script>
 

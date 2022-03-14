@@ -1,0 +1,49 @@
+{
+  "artifactName": "${productName}-Pro-${version}.${ext}",
+  "appId": "dev.bigaston.podchapter",
+  "productName": "PodChapter",
+  "win": {
+    "target": [
+      "portable",
+      "msi"
+    ],
+    "publish": [
+      "github"
+    ]
+  },
+  "linux": {
+    "target": [
+      "AppImage",
+      "deb"
+    ],
+    "icon": "./build/icon.png",
+    "executableName": "podchapter",
+    "category": "Audio",
+    "publish": [
+      "github"
+    ]
+  },
+  "mac": {
+    "target": [
+      "dmg"
+    ],
+    "category": "public.app-category.utilities",
+    "publish": [
+      "github"
+    ]
+  },
+  "dmg": {
+    "contents": [
+      {
+        "x": 110,
+        "y": 150
+      },
+      {
+        "x": 240,
+        "y": 150,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  }
+}

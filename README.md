@@ -21,7 +21,7 @@ L'application est codée en Electron ce qui la rend un peu plus lourde et plus l
 
 ### Mac
 
-- [DMG](https://github.com/Bigaston/podchapter/releases/download/v2.5.4/PodChapter-2.5.4.dmg)
+- [DMG](https://github.com/Bigaston/podchapter/releases/download/v2.5.3/PodChapter-2.5.3.dmg)
 
 ### Linux
 
